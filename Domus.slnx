@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Domus.Api/Domus.Api.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Domus.Api.Tests/Domus.Api.Tests.csproj" />
+  </Folder>
+</Solution>
