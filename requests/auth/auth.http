@@ -1,0 +1,87 @@
+# Domus Auth — manual API tests (VS Code REST Client / JetBrains HTTP Client)
+# Run the API first: dotnet run --project src/Domus.Api
+#
+# Tip: run requests top-to-bottom. Login/refresh responses auto-fill token variables.
+
+@baseUrl = http://localhost:5167
+# Or HTTPS: @baseUrl = https://localhost:7057
+
+@email = owner@test.com
+@password = Password123!
+
+@accessToken = PASTE_ACCESS_TOKEN_HERE
+@refreshToken = PASTE_REFRESH_TOKEN_HERE
+@oldRefreshToken = PASTE_OLD_REFRESH_TOKEN_HERE
+@inviteToken = PASTE_INVITE_TOKEN_HERE
+
+### 1. Register Owner (expect 201)
+POST {{baseUrl}}/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}",
+  "fullName": "Test Owner",
+  "companyName": "Domus Test Co"
+}
+
+### 2. Login (expect 200)
+# @name login
+POST {{baseUrl}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+###
+@accessToken = {{login.response.body.accessToken}}
+@refreshToken = {{login.response.body.refreshToken}}
+@oldRefreshToken = {{login.response.body.refreshToken}}
+
+### 3. Refresh (expect 200 — new token pair)
+# @name refresh
+POST {{baseUrl}}/api/v1/auth/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
+
+###
+@accessToken = {{refresh.response.body.accessToken}}
+@refreshToken = {{refresh.response.body.refreshToken}}
+
+### 4. Reuse OLD refresh token (expect 401 — reuse detection)
+POST {{baseUrl}}/api/v1/auth/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "{{oldRefreshToken}}"
+}
+
+### 5. Revoke (logout — expect 200)
+POST {{baseUrl}}/api/v1/auth/revoke
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
+
+### 6. Refresh after revoke (expect 401)
+POST {{baseUrl}}/api/v1/auth/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
+
+### 7. Accept invite (expect 200 — needs a valid invite token from DB/owner flow)
+POST {{baseUrl}}/api/v1/auth/accept-invite
+Content-Type: application/json
+
+{
+  "inviteToken": "{{inviteToken}}",
+  "password": "NewPassword123!"
+}

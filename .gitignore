@@ -10,6 +10,19 @@
 *.userosscache
 *.sln.docstates
 *.env
+.env.*
+.env.local
+
+# ASP.NET local secrets (user-secrets live outside repo; these are common leak paths)
+**/secrets.json
+appsettings.local.json
+appsettings.*.local.json
+
+# Local HTTP client / Postman overrides (real tokens, personal credentials)
+requests/**/*.local.http
+http-client.private.env.json
+requests/**/http-client.private.env.json
+postman/**/*.private.json
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
