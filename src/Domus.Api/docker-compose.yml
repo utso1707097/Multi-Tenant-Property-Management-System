@@ -1,0 +1,14 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: domus-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: domus
+    ports:
+      - "5432:5432"
+    volumes:
+      - domus_pg_data:/var/lib/postgresql/data
+volumes:
+  domus_pg_data:
