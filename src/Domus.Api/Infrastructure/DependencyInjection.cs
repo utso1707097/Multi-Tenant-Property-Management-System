@@ -1,4 +1,5 @@
 using System.Text;
+using Domus.Application.Auth.Commands.RegisterOwner;
 using Domus.Application.Common.Interfaces;
 using Domus.Domain.Constants;
 using Domus.Infrastructure.Auth;
@@ -8,6 +9,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
+using FluentValidation;
+using Domus.Application.Auth.Commands.RefreshToken;
+using Domus.Application.Auth.Commands.Login;
+using Domus.Application.Auth.Commands.RevokeToken;
+using Domus.Application.Auth.Commands.AcceptInvite;
 
 namespace Domus.Infrastructure;
 
@@ -74,7 +80,12 @@ public static class DependencyInjection
         services.AddScoped<ITenantProvider, TenantProvider>();
         services.AddScoped<IAppDbContext>(sp => sp.GetRequiredService<AppDbContext>());
         services.AddSingleton(TimeProvider.System);
-
+        services.AddValidatorsFromAssemblyContaining<RegisterOwnerValidator>();
+        services.AddScoped<RegisterOwnerHandler>();
+        services.AddScoped<LoginHandler>();
+        services.AddScoped<RefreshTokenHandler>();
+        services.AddScoped<RevokeTokenHandler>();
+        services.AddScoped<AcceptInviteHandler>();
         return services;
     }
 }
