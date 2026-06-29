@@ -1,6 +1,8 @@
+using Domus.Domain.Common;
+
 namespace Domus.Domain.Entities;
 
-public sealed class BillingSubscription
+public sealed class BillingSubscription: ITenantScoped
 {
     public Guid Id { get; init; }
     public Guid OwnerTenantId { get; set; }

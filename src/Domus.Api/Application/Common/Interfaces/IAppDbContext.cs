@@ -12,4 +12,5 @@ public interface IAppDbContext
     DbSet<BillingSubscription> BillingSubscriptions { get; }
     DbSet<Renter> Renters { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+    DbSet<Property> Properties { get; }
 }

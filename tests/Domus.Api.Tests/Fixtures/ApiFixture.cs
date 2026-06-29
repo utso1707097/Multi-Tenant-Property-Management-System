@@ -1,3 +1,4 @@
+using Domus.Application.Common.Interfaces;
 using Domus.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -44,10 +45,17 @@ public sealed class ApiFixture : WebApplicationFactory<Program>, IAsyncLifetime
         var options = new DbContextOptionsBuilder<AppDbContext>()
             .UseNpgsql(_postgres.GetConnectionString())
             .Options;
-        await using (var db = new AppDbContext(options))
+        await using (var db = new AppDbContext(options,  new NullTenantProvider()))
             await db.Database.MigrateAsync();
 
         _ = CreateClient();
+    }
+
+    private sealed class NullTenantProvider : ITenantProvider
+    {
+        public Guid? TenantId => null;
+
+        public Guid UserId => Guid.Empty;
     }
 
     public new async Task DisposeAsync()
