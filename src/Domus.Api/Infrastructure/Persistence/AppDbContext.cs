@@ -16,6 +16,7 @@ public sealed class AppDbContext(DbContextOptions<AppDbContext> options, ITenant
     public DbSet<BillingSubscription> BillingSubscriptions => Set<BillingSubscription>();
     public DbSet<Renter> Renters => Set<Renter>();
     public DbSet<Property> Properties => Set<Property>();
+    public DbSet<Unit> Units => Set<Unit>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

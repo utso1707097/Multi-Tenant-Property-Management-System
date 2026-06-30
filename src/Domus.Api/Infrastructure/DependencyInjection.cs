@@ -14,6 +14,10 @@ using Domus.Application.Auth.Commands.RefreshToken;
 using Domus.Application.Auth.Commands.Login;
 using Domus.Application.Auth.Commands.RevokeToken;
 using Domus.Application.Auth.Commands.AcceptInvite;
+using Domus.Application.Properties.Commands.CreateProperty;
+using Domus.Application.Properties.Queries.ListProperties;
+using Domus.Application.Units.Commands.CreateUnit;
+using Domus.Application.Units.Queries.ListUnits;
 
 namespace Domus.Infrastructure;
 
@@ -86,6 +90,10 @@ public static class DependencyInjection
         services.AddScoped<RefreshTokenHandler>();
         services.AddScoped<RevokeTokenHandler>();
         services.AddScoped<AcceptInviteHandler>();
+        services.AddScoped<CreatePropertyHandler>();
+        services.AddScoped<ListPropertiesHandler>();
+        services.AddScoped<CreateUnitHandler>();
+        services.AddScoped<ListUnitsHandler>();
         return services;
     }
 }

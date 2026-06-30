@@ -13,4 +13,5 @@ public interface IAppDbContext
     DbSet<Renter> Renters { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     DbSet<Property> Properties { get; }
+    DbSet<Unit> Units { get; }
 }
