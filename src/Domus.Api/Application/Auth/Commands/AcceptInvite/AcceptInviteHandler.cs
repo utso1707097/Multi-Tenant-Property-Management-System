@@ -23,8 +23,8 @@ public sealed class AcceptInviteHandler(
         {
             return Result.Failure<AcceptInviteResponse>(
             new Error("ERR_INVALID_INVITE_TOKEN", "Invalid invite token.", StatusCodes.Status400BadRequest));
-                    // Maps to ERR_INVALID_INVITE_TOKEN via code — or use:
-                    // new Error("ERR_INVALID_INVITE_TOKEN", "Invalid invite token.", 400)
+            // Maps to ERR_INVALID_INVITE_TOKEN via code — or use:
+            // new Error("ERR_INVALID_INVITE_TOKEN", "Invalid invite token.", 400)
         }
 
         if (renter.InviteExpires is null || renter.InviteExpires <= clock.GetUtcNow())

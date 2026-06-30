@@ -4,9 +4,9 @@ namespace Domus.Application.Common.Interfaces;
 
 public interface ITokenService
 {
-  (string Token, DateTimeOffset ExpiresAt) CreateAccessToken(
-      ApplicationUser user,
-      IEnumerable<string> roles);
+    (string Token, DateTimeOffset ExpiresAt) CreateAccessToken(
+        ApplicationUser user,
+        IEnumerable<string> roles);
 
-  string CreateRefreshToken();
+    string CreateRefreshToken();
 }

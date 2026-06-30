@@ -45,7 +45,7 @@ public sealed class ApiFixture : WebApplicationFactory<Program>, IAsyncLifetime
         var options = new DbContextOptionsBuilder<AppDbContext>()
             .UseNpgsql(_postgres.GetConnectionString())
             .Options;
-        await using (var db = new AppDbContext(options,  new NullTenantProvider()))
+        await using (var db = new AppDbContext(options, new NullTenantProvider()))
             await db.Database.MigrateAsync();
 
         _ = CreateClient();

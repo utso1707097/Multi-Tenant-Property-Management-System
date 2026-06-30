@@ -2,7 +2,7 @@ using Domus.Domain.Common;
 
 namespace Domus.Domain.Entities;
 
-public sealed class Renter: ITenantScoped
+public sealed class Renter : ITenantScoped
 {
     public Guid Id { get; init; }
     public Guid OwnerTenantId { get; set; }
