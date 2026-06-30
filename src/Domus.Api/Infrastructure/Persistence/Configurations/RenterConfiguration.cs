@@ -13,9 +13,16 @@ public sealed class RenterConfiguration : IEntityTypeConfiguration<Renter>
         builder.HasKey(x => x.Id);
         builder.HasIndex(x => x.InviteToken).IsUnique();
         builder.HasIndex(x => x.OwnerTenantId);
+        builder.Property(x => x.InviteToken).HasMaxLength(256);
+        builder.Property(x => x.CreatedAt).IsRequired();
+        builder.Property(x => x.UpdatedAt).IsRequired();
         builder.HasOne<ApplicationUser>()
             .WithMany()
             .HasForeignKey(x => x.UserId)
             .OnDelete(DeleteBehavior.Cascade);
+        builder.HasOne(x => x.Unit)
+            .WithMany()
+            .HasForeignKey(x => x.UnitId)
+            .OnDelete(DeleteBehavior.SetNull);
     }
 }

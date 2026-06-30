@@ -13,7 +13,7 @@ public sealed class UnitConfiguration : IEntityTypeConfiguration<Unit>
         builder.HasKey(x => x.Id);
         builder.HasIndex(x => x.OwnerTenantId);
         builder.HasIndex(x => new { x.PropertyId, x.UnitNumber }).IsUnique();
-        builder.Property(x => x.UnitNumber).HasMaxLength(100).IsRequired();
+        builder.Property(x => x.UnitNumber).HasMaxLength(20).IsRequired();
         builder.Property(x => x.Floor).IsRequired(false);
         builder.Property(x => x.Bedrooms).IsRequired(false);
         builder.Property(x => x.RentAmount).HasPrecision(12, 2).IsRequired();

@@ -12,6 +12,7 @@ public sealed class AppDbContext(DbContextOptions<AppDbContext> options, ITenant
     : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>(options),
       IAppDbContext
 {
+    DbSet<ApplicationUser> IAppDbContext.Users => Users;
     public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
     public DbSet<BillingSubscription> BillingSubscriptions => Set<BillingSubscription>();
     public DbSet<Renter> Renters => Set<Renter>();

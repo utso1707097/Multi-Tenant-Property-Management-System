@@ -38,7 +38,7 @@ public sealed class InviteRenterHandler(
             if (!unitExists)
             {
                 return Result.Failure<InviteRenterResponse>(
-                    Error.NotFound("ERR_UNIT_NOT_FOUND", "Unit not found."));
+                    Error.NotFound("ERR_NOT_FOUND", "Unit not found."));
             }
         }
 
@@ -91,16 +91,21 @@ public sealed class InviteRenterHandler(
         var inviteExpiresAt =
             clock.GetUtcNow().AddDays(7);
 
+        var now = clock.GetUtcNow();
+        var renterId = Guid.NewGuid();
+
         db.Renters.Add(new Renter
         {
-            Id = Guid.NewGuid(),
+            Id = renterId,
             OwnerTenantId = tenant.TenantId!.Value,
             UserId = user.Id,
             UnitId = command.UnitId,
             MoveInDate = command.MoveInDate,
             LeaseEndDate = command.LeaseEndDate,
             InviteToken = inviteToken,
-            InviteExpires = inviteExpiresAt
+            InviteExpires = inviteExpiresAt,
+            CreatedAt = now,
+            UpdatedAt = now
         });
 
         await db.SaveChangesAsync(cancellationToken);
@@ -108,7 +113,7 @@ public sealed class InviteRenterHandler(
 
         return Result.Success(
             new InviteRenterResponse(
-                user.Id,
+                renterId,
                 user.Email!,
                 inviteToken,
                 inviteExpiresAt));

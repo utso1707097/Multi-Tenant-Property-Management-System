@@ -1,6 +1,8 @@
 using Domus.Application.Renters.Commands.InviteRenter;
 using FluentValidation;
 
+namespace Domus.Application.Renters.Commands.InviteRenter;
+
 public sealed class InviteRenterValidator : AbstractValidator<InviteRenterCommand>
 {
     public InviteRenterValidator()

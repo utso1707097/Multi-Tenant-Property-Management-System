@@ -7,4 +7,5 @@ public sealed record RenterListItem(
     Guid? UnitId,
     DateOnly? MoveInDate,
     DateOnly? LeaseEndDate,
+    bool InvitePending,
     DateTimeOffset CreatedAt);

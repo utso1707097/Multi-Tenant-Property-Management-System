@@ -1,5 +1,4 @@
 using Domus.Domain.Common;
-using Domus.Infrastructure.Auth;
 
 namespace Domus.Domain.Entities;
 
@@ -16,5 +15,4 @@ public sealed class Renter : ITenantScoped
     public DateTimeOffset CreatedAt { get; set; }
     public DateTimeOffset UpdatedAt { get; set; }
     public Unit? Unit { get; set; }
-    public ApplicationUser User { get; set; } = null!;
 }
