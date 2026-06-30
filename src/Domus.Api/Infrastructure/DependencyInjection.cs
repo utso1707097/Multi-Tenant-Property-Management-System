@@ -18,6 +18,8 @@ using Domus.Application.Properties.Commands.CreateProperty;
 using Domus.Application.Properties.Queries.ListProperties;
 using Domus.Application.Units.Commands.CreateUnit;
 using Domus.Application.Units.Queries.ListUnits;
+using Domus.Application.Renters.Commands.InviteRenter;
+using Domus.Application.Renters.Queries.ListRenters;
 
 namespace Domus.Infrastructure;
 
@@ -94,6 +96,8 @@ public static class DependencyInjection
         services.AddScoped<ListPropertiesHandler>();
         services.AddScoped<CreateUnitHandler>();
         services.AddScoped<ListUnitsHandler>();
+        services.AddScoped<InviteRenterHandler>();
+        services.AddScoped<ListRentersHandler>();
         return services;
     }
 }
